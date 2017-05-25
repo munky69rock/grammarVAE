@@ -1,0 +1,2 @@
+[flake8]
+exclude = .eggs,*.egg,example,.git,__pycache__,old,build,dist,lib,pyvenv.cfg

@@ -1,7 +1,9 @@
 import nltk
+
 import numpy as np
+
 import six
-import pdb
+
 
 gram = """S -> S '+' T
 S -> S '*' T
@@ -34,22 +36,21 @@ count = 0
 for a in GCFG.productions():
     rhs_map[count] = []
     for b in a.rhs():
-        if not isinstance(b,six.string_types):
+        if not isinstance(b, six.string_types):
             s = b.symbol()
             rhs_map[count].extend(list(np.where(np.array(lhs_list) == s)[0]))
     count = count + 1
 
-masks = np.zeros((len(lhs_list),D))
+masks = np.zeros((len(lhs_list), D))
 count = 0
-#all_lhs.append(0)
+# all_lhs.append(0)
 for sym in lhs_list:
-    is_in = np.array([a == sym for a in all_lhs], dtype=int).reshape(1,-1)
-    #pdb.set_trace()
+    is_in = np.array([a == sym for a in all_lhs], dtype=int).reshape(1, -1)
+    # pdb.set_trace()
     masks[count] = is_in
     count = count + 1
 
 index_array = []
 for i in range(masks.shape[1]):
-    index_array.append(np.where(masks[:,i]==1)[0][0])
+    index_array.append(np.where(masks[:, i] == 1)[0][0])
 ind_of_ind = np.array(index_array)
-
